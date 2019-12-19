@@ -3,9 +3,10 @@ import {
   approveAssetTransfer,
   checkApprovedAssetCreation,
   approveAssetCreation,
-  signOrder,
   performOrder,
-  provider
+  provider,
+  signOrderAccount1,
+  signOrderDynamic
 } from "./src/example";
 import { config } from "./src/config";
 
@@ -32,25 +33,45 @@ btnSignOrder.addEventListener("click", async () => {
     return;
   }
 
-  if (provider.accountId !== config.account1Id) {
-    printWarning("Select account1 in metamask to sign this order.");
-    return;
-  }
+  if (provider.accountId === config.account1Id) {
+    let error = null;
+    await signOrderAccount1().catch(e => {
+      error = e;
+      printError(e);
+    });
 
-  let error = null;
-  await signOrder().catch(e => {
-    error = e;
-    printError(e);
-  });
+    if (!error) {
+      printMessage(
+        "Order signing with account 1 sucessfull: " + config.signatureAccount1
+      );
+    }
+  } else {
+    let error = null;
+    await signOrderDynamic().catch(e => {
+      error = e;
+      printError(e);
+    });
 
-  if (!error) {
-    printMessage("Order signing sucessfull: " + config.signature);
+    if (!error) {
+      printMessage(
+        "Order signing with any account sucessfull: " + config.signatureDynamic
+      );
+    }
   }
 });
 
 btnPerformOrder.addEventListener("click", async () => {
-  if (!config.signature) {
-    printWarning("No signature provided. Please sign the order first.");
+  if (!config.signatureAccount1) {
+    printWarning(
+      "No signature from account 1 provided. Please sign the order with account 1 first."
+    );
+    return;
+  }
+
+  if (!config.signatureDynamic) {
+    printWarning(
+      "No second signature provided. Please sign the order with any account except account 1."
+    );
     return;
   }
 

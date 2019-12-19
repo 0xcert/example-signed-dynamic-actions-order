@@ -1,7 +1,7 @@
 import {
   OrderKind,
   ActionsOrderActionKind,
-  DynamicActionsOrder
+  SignedDynamicActionsOrder
 } from "@0xcert/ethereum-gateway";
 
 export const config = {
@@ -14,13 +14,14 @@ export const config = {
       valueLedgerDeployOrderId: "0x327577e70e21AcEe01447AD06939Fb4057232b2A"
     }
   },
-  assetLedgerId: "", // Input you own asset ledger id
-  account1Id: "", // Input your primary metamask account Id.
-  signature: ""
+  assetLedgerId: "0xd4466A99672366Ad2Acd7304AD35D0705ce26787", // Input you own asset ledger id
+  account1Id: "0x9cb3b30E995F968e044C0Bf48C70559a53b86cfb", // Input your primary metamask account Id.
+  signatureAccount1: "",
+  signatureDynamic: ""
 };
 
 export const order = {
-  kind: OrderKind.DYNAMIC_ACTIONS_ORDER,
+  kind: OrderKind.SIGNED_DYNAMIC_ACTIONS_ORDER,
   signers: [config.account1Id],
   seed: Date.now(),
   expiration: Date.now() + 86400000,
@@ -40,4 +41,4 @@ export const order = {
         "c6c14772f269bed1161d4350403f4c867c749b3cce7abe84c6d0605068cd8a87"
     }
   ]
-} as DynamicActionsOrder;
+} as SignedDynamicActionsOrder;
