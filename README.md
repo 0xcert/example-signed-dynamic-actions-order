@@ -1,4 +1,4 @@
-This is an example of how to use dynamic signed actions order in 0xcert framework v2.
+This is an example of how to use signed dynamic actions order in 0xcert framework v2.
 
 Project stucture:
 
