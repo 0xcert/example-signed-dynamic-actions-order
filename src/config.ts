@@ -4,18 +4,18 @@ import {
   SignedDynamicActionsOrder
 } from "@0xcert/ethereum-gateway";
 
+import {
+  buildGatewayConfig,
+  NetworkKind
+} from "@0xcert/ethereum-metamask-provider";
+
 export const config = {
   providerConfig: {
     requiredConfirmations: 1,
-    // ropsten config
-    gatewayConfig: {
-      actionsOrderId: "0x6Cb40DB529637C218824a2660EFC7CbaD5485115",
-      assetLedgerDeployOrderId: "0x9de066264347165693eC890ccC1C8Af8f9A15f51",
-      valueLedgerDeployOrderId: "0x327577e70e21AcEe01447AD06939Fb4057232b2A"
-    }
+    gatewayConfig: buildGatewayConfig(NetworkKind.ROPSTEN) // ropsten config
   },
-  assetLedgerId: "0xd4466A99672366Ad2Acd7304AD35D0705ce26787", // Input you own asset ledger id
-  account1Id: "0x9cb3b30E995F968e044C0Bf48C70559a53b86cfb", // Input your primary metamask account Id.
+  assetLedgerId: "", // Input you own asset ledger id
+  account1Id: "", // Input your primary metamask account Id.
   signatureAccount1: "",
   signatureDynamic: ""
 };
